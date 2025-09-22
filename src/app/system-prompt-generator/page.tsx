@@ -374,8 +374,8 @@ const SystemPromptGenerator: React.FC = () => {
   }
 
   return (
-    <div className='max-w-[1440px] mx-auto p-6 bg-gray-50 min-h-screen'>
-      <div className='bg-white rounded-lg shadow-lg p-8'>
+    <div className='p-6 bg-gray-50 min-h-screen'>
+      <div className='bg-white rounded-lg shadow-lg p-8 max-w-7xl mx-auto'>
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-gray-900 mb-3'>
             System Prompt Generator
