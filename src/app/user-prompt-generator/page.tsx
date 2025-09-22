@@ -10,51 +10,10 @@ import {
   Shield,
   Target
 } from 'lucide-react'
-
-interface FormData {
-  // Situation fields
-  projectType: string
-  techStack: string
-  architecture: string
-  existingPatterns: string
-  constraints: string
-
-  // Challenge fields
-  taskDescription: string
-  inputs: string
-  outputs: string
-  performance: string
-  requirements: string
-
-  // Audience fields
-  teamLevel: 'junior' | 'mid-level' | 'senior' | 'expert'
-  techFamiliarity: string
-  maintenance: string
-  codebase: 'internal' | 'external' | 'open-source'
-
-  // Format fields
-  codingStyle: string
-  conventions: string
-  documentation: string
-  testing: string
-  structure: string
-
-  // Foundations fields
-  security: string
-  errorHandling: string
-  accessibility: string
-  compliance: string
-  logging: string
-
-  // Advanced options
-  promptType: 'standard' | 'example-driven' | 'constraint-based' | 'test-driven'
-  examples: string
-  constraints_advanced: string
-  testCases: string
-}
+import type { IFormData } from '@/types/userPromptGenerator'
 
 const VibeCodePromptGenerator: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<IFormData>({
     // Situation fields
     projectType: '',
     techStack: '',
@@ -98,7 +57,7 @@ const VibeCodePromptGenerator: React.FC = () => {
 
   const [generatedPrompt, setGeneratedPrompt] = useState('')
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof IFormData, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value
@@ -284,7 +243,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('projectType', e.target.value)
                     }
                     placeholder='e.g., a React e-commerce web application'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -298,7 +257,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('techStack', e.target.value)
                     }
                     placeholder='e.g., React 18, Node.js, PostgreSQL, Redis'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -312,7 +271,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('architecture', e.target.value)
                     }
                     placeholder='e.g., microservices architecture with Docker containers'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -326,7 +285,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., repository pattern, service layers, custom hooks for API calls'
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -352,7 +311,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., Create a user authentication system with login, registration, and password reset functionality'
                     rows={3}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div className='grid grid-cols-2 gap-4'>
@@ -367,7 +326,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                         handleInputChange('inputs', e.target.value)
                       }
                       placeholder='e.g., email, password, user data'
-                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                     />
                   </div>
                   <div>
@@ -381,7 +340,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                         handleInputChange('outputs', e.target.value)
                       }
                       placeholder='e.g., JWT token, user profile, success/error responses'
-                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                     />
                   </div>
                 </div>
@@ -396,7 +355,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('performance', e.target.value)
                     }
                     placeholder='e.g., response time < 200ms, handle 1000 concurrent users'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -420,7 +379,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('teamLevel', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='junior'>Junior developers</option>
                     <option value='mid-level'>Mid-level developers</option>
@@ -439,7 +398,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('techFamiliarity', e.target.value)
                     }
                     placeholder='e.g., strong React knowledge but new to TypeScript'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -453,7 +412,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('maintenance', e.target.value)
                     }
                     placeholder='e.g., 3+ years, handed off to client team'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -479,7 +438,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('codingStyle', e.target.value)
                     }
                     placeholder='e.g., functional components with hooks, async/await'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -493,7 +452,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('conventions', e.target.value)
                     }
                     placeholder='e.g., Airbnb style guide, camelCase for variables'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -507,7 +466,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('documentation', e.target.value)
                     }
                     placeholder='e.g., JSDoc comments, inline comments for complex logic'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -521,7 +480,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('testing', e.target.value)
                     }
                     placeholder='e.g., unit tests with Jest, integration tests'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -547,7 +506,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., input validation, SQL injection prevention, HTTPS only'
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -561,7 +520,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('errorHandling', e.target.value)
                     }
                     placeholder='e.g., graceful error handling, user-friendly error messages'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -575,7 +534,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       handleInputChange('accessibility', e.target.value)
                     }
                     placeholder='e.g., WCAG 2.1 AA compliance, screen reader support'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -596,7 +555,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('promptType', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='standard'>Standard S.C.A.F.F.</option>
                     <option value='example-driven'>
@@ -623,7 +582,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       }
                       placeholder='Paste existing code patterns or examples here...'
                       rows={4}
-                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 font-mono text-sm'
+                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 font-mono text-sm text-gray-900 placeholder-gray-500'
                     />
                   </div>
                 )}
@@ -643,7 +602,7 @@ const VibeCodePromptGenerator: React.FC = () => {
                       }
                       placeholder="e.g., Must not use external libraries beyond what's imported, Must be IE11 compatible"
                       rows={3}
-                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                      className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                     />
                   </div>
                 )}

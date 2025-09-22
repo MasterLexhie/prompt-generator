@@ -98,7 +98,7 @@ const PromptRoutesPage = () => {
       ],
       useCase: 'Plan and execute full application development systematically',
       path: '/feature-builder',
-      isAvailable: false
+      isAvailable: true
     },
     {
       id: 'quick-prompts',

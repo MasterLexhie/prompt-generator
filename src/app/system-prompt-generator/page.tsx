@@ -12,53 +12,10 @@ import {
   Brain,
   Target
 } from 'lucide-react'
-
-interface FormData {
-  // Core Identity
-  experienceLevel: 'junior' | 'mid-level' | 'senior' | 'principal' | 'architect'
-  specializations: string
-  primaryTechStack: string
-  architecturalPatterns: string
-
-  // Coding Philosophy
-  codingStyle: 'functional' | 'object-oriented' | 'hybrid' | 'reactive'
-  qualityStandards: string
-  performanceApproach: string
-  documentationLevel: 'minimal' | 'moderate' | 'comprehensive' | 'tutorial'
-
-  // Security & Best Practices
-  securityApproach: string
-  errorHandlingStyle: string
-  testingPhilosophy: string
-  accessibilityStandards: string
-
-  // Communication Style
-  explanationLevel: 'brief' | 'balanced' | 'detailed' | 'educational'
-  commentingStyle: string
-  responseStyle: 'professional' | 'friendly' | 'mentor' | 'collaborative'
-  questionHandling: string
-
-  // Team Context
-  teamSkillLevel: 'junior' | 'mixed' | 'senior' | 'expert'
-  codebaseType: 'prototype' | 'mvp' | 'production' | 'enterprise'
-  maintenanceTimeframe: 'short-term' | 'medium-term' | 'long-term' | 'legacy'
-  handoffRequirements: string
-
-  // Technical Preferences
-  frameworkPreferences: string
-  toolingPreferences: string
-  deploymentContext: string
-  scalabilityConsiderations: string
-
-  // Custom Rules
-  doAlways: string
-  neverDo: string
-  priorityOrder: string
-  specialInstructions: string
-}
+import type { IFormData } from '@/types/systemPromptGenerator'
 
 const SystemPromptGenerator: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<IFormData>({
     // Core Identity
     experienceLevel: 'senior',
     specializations: '',
@@ -104,7 +61,7 @@ const SystemPromptGenerator: React.FC = () => {
 
   const [generatedPrompt, setGeneratedPrompt] = useState('')
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof IFormData, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value
@@ -449,7 +406,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('experienceLevel', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='junior'>Junior Engineer (1-3 years)</option>
                     <option value='mid-level'>
@@ -473,7 +430,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('specializations', e.target.value)
                     }
                     placeholder='e.g., Full-stack web development, DevOps, Mobile development'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -487,7 +444,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('primaryTechStack', e.target.value)
                     }
                     placeholder='e.g., React, Node.js, PostgreSQL, AWS, Docker'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -501,7 +458,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('architecturalPatterns', e.target.value)
                     }
                     placeholder='e.g., Microservices, Clean Architecture, MVC, Event-driven'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -525,7 +482,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('codingStyle', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='functional'>Functional Programming</option>
                     <option value='object-oriented'>Object-Oriented</option>
@@ -544,7 +501,7 @@ const SystemPromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., DRY principles, SOLID principles, code coverage >80%, ESLint compliance'
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -558,7 +515,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('performanceApproach', e.target.value)
                     }
                     placeholder='e.g., Optimize for readability first, then performance; Use lazy loading; Minimize bundle size'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -570,7 +527,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('documentationLevel', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='minimal'>Minimal (Essential only)</option>
                     <option value='moderate'>
@@ -607,7 +564,7 @@ const SystemPromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., Zero-trust architecture, OWASP compliance, input validation, output encoding'
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -621,7 +578,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('errorHandlingStyle', e.target.value)
                     }
                     placeholder='e.g., Fail fast with graceful degradation, comprehensive logging, user-friendly messages'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -635,7 +592,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('testingPhilosophy', e.target.value)
                     }
                     placeholder='e.g., Test-driven development, Unit tests + Integration tests, >80% coverage'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -652,7 +609,7 @@ const SystemPromptGenerator: React.FC = () => {
                       )
                     }
                     placeholder='e.g., WCAG 2.1 AA compliance, semantic HTML, screen reader support'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -676,7 +633,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('explanationLevel', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='brief'>Brief (Key points only)</option>
                     <option value='balanced'>Balanced (Moderate detail)</option>
@@ -697,7 +654,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('responseStyle', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='professional'>Professional & Direct</option>
                     <option value='friendly'>Friendly & Approachable</option>
@@ -718,7 +675,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('commentingStyle', e.target.value)
                     }
                     placeholder="e.g., JSDoc format, inline for complex logic, explain 'why' not 'what'"
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -742,7 +699,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('teamSkillLevel', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='junior'>Primarily Junior Developers</option>
                     <option value='mixed'>Mixed Skill Levels</option>
@@ -759,7 +716,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('codebaseType', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='prototype'>
                       Prototype/Proof of Concept
@@ -780,7 +737,7 @@ const SystemPromptGenerator: React.FC = () => {
                     onChange={(e) =>
                       handleInputChange('maintenanceTimeframe', e.target.value)
                     }
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='short-term'>
                       Short-term (less than 6 months)
@@ -815,7 +772,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('frameworkPreferences', e.target.value)
                     }
                     placeholder='e.g., Prefer Next.js over Create React App, Express.js for APIs'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -829,7 +786,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('toolingPreferences', e.target.value)
                     }
                     placeholder='e.g., TypeScript over JavaScript, Prettier + ESLint, Jest for testing'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -843,7 +800,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('deploymentContext', e.target.value)
                     }
                     placeholder='e.g., AWS with Docker containers, Vercel for frontend, CI/CD with GitHub Actions'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -860,7 +817,7 @@ const SystemPromptGenerator: React.FC = () => {
                       )
                     }
                     placeholder='e.g., Design for horizontal scaling, database optimization, caching strategies'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
@@ -886,7 +843,7 @@ const SystemPromptGenerator: React.FC = () => {
                     }
                     placeholder='e.g., Include TypeScript types, Add error boundaries, Implement loading states'
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -900,7 +857,7 @@ const SystemPromptGenerator: React.FC = () => {
                     }
                     placeholder="e.g., Use 'any' type in TypeScript, Skip input validation, Use deprecated APIs"
                     rows={2}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -914,7 +871,7 @@ const SystemPromptGenerator: React.FC = () => {
                       handleInputChange('priorityOrder', e.target.value)
                     }
                     placeholder='e.g., Security > Performance > Developer Experience > Code Brevity'
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
                 <div>
@@ -928,7 +885,7 @@ const SystemPromptGenerator: React.FC = () => {
                     }
                     placeholder='Any other specific behaviors, constraints, or preferences...'
                     rows={3}
-                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+                    className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900 placeholder-gray-500'
                   />
                 </div>
               </div>
