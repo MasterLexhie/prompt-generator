@@ -2,6 +2,8 @@
 
 A professional AI-assisted development toolkit that helps developers generate structured prompts and maintain consistent coding standards across projects.
 
+Link to app - https://prompt-generator-tool.vercel.app/
+
 ## Features
 
 ### 1. System Prompt Generator
