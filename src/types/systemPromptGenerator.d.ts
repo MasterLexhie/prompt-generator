@@ -1,4 +1,4 @@
-export interface IFormData {
+export interface SystemPromptFormData {
   // Core Identity
   experienceLevel: 'junior' | 'mid-level' | 'senior' | 'principal' | 'architect'
   specializations: string

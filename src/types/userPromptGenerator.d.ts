@@ -1,4 +1,4 @@
-export interface IFormData {
+export interface UserPromptFormData {
   // Situation fields
   projectType: string
   techStack: string

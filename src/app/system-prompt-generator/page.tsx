@@ -12,10 +12,10 @@ import {
   Brain,
   Target
 } from 'lucide-react'
-import type { IFormData } from '@/types/systemPromptGenerator'
+import { SystemPromptFormData } from '@/types'
 
 const SystemPromptGenerator: React.FC = () => {
-  const [formData, setFormData] = useState<IFormData>({
+  const [formData, setFormData] = useState<SystemPromptFormData>({
     // Core Identity
     experienceLevel: 'senior',
     specializations: '',
@@ -61,7 +61,10 @@ const SystemPromptGenerator: React.FC = () => {
 
   const [generatedPrompt, setGeneratedPrompt] = useState('')
 
-  const handleInputChange = (field: keyof IFormData, value: string) => {
+  const handleInputChange = (
+    field: keyof SystemPromptFormData,
+    value: string
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value
@@ -70,9 +73,6 @@ const SystemPromptGenerator: React.FC = () => {
 
   const generateSystemPrompt = () => {
     let prompt = ''
-
-    // Core Identity Section
-    prompt += '# CORE IDENTITY\n'
 
     // Experience and Role
     const experienceLevels = {
@@ -87,6 +87,9 @@ const SystemPromptGenerator: React.FC = () => {
       architect:
         'You are a solutions architect with deep expertise in system design, scalability, and enterprise-level decision making.'
     }
+
+    // Core Identity Section
+    prompt += '# CORE IDENTITY\n'
 
     prompt += `${experienceLevels[formData.experienceLevel]}\n\n`
 

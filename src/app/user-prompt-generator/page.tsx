@@ -10,10 +10,10 @@ import {
   Shield,
   Target
 } from 'lucide-react'
-import type { IFormData } from '@/types/userPromptGenerator'
+import type { UserPromptFormData } from '@/types'
 
 const VibeCodePromptGenerator: React.FC = () => {
-  const [formData, setFormData] = useState<IFormData>({
+  const [formData, setFormData] = useState<UserPromptFormData>({
     // Situation fields
     projectType: '',
     techStack: '',
@@ -57,7 +57,10 @@ const VibeCodePromptGenerator: React.FC = () => {
 
   const [generatedPrompt, setGeneratedPrompt] = useState('')
 
-  const handleInputChange = (field: keyof IFormData, value: string) => {
+  const handleInputChange = (
+    field: keyof UserPromptFormData,
+    value: string
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value

@@ -2,219 +2,179 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { ReactNode } from 'react'
 import {
   Brain,
   Target,
   Code2,
   Sparkles,
   ArrowRight,
-  Users,
-  Shield,
   Settings,
   Zap,
   BookOpen,
   ChevronRight,
-  Monitor,
-  Smartphone,
-  Globe
+  Monitor
 } from 'lucide-react'
+import type { ColorClass, ColorScheme, Route } from '@/types'
 
-type ColorScheme = 'blue' | 'green' | 'purple' | 'yellow' | 'indigo' | 'red'
+const promptRoutes: Route[] = [
+  {
+    id: 'system-prompt',
+    title: 'System Prompt Generator',
+    description:
+      'Create consistent AI behavior for professional vibe coding sessions',
+    icon: <Brain className='h-8 w-8' />,
+    color: 'blue' as ColorScheme,
+    features: [
+      'Define AI personality and expertise level',
+      'Set coding standards and quality requirements',
+      'Configure security and best practices',
+      'Establish team context and communication style'
+    ],
+    useCase:
+      'Set once per project to establish consistent code quality and standards',
+    path: '/system-prompt-generator',
+    isAvailable: true
+  },
+  {
+    id: 'user-prompt',
+    title: 'S.C.A.F.F. User Prompt Generator',
+    description:
+      'Generate structured prompts for specific coding tasks and features',
+    icon: <Target className='h-8 w-8' />,
+    color: 'green',
+    features: [
+      'Situation, Challenge, Audience, Format, Foundations framework',
+      'Example-driven and constraint-based options',
+      'Test-driven development support',
+      'Production-ready code specifications'
+    ],
+    useCase: 'Use for each feature or component you want to build',
+    path: '/user-prompt-generator',
+    isAvailable: true
+  },
+  {
+    id: 'feature-builder',
+    title: 'Feature-by-Feature Builder',
+    description:
+      'Systematic approach to building applications one feature at a time',
+    icon: <Code2 className='h-8 w-8' />,
+    color: 'purple',
+    features: [
+      'Progressive feature development',
+      'Integration planning between features',
+      'Free tier optimization strategies',
+      'Complete feature implementation'
+    ],
+    useCase: 'Plan and execute full application development systematically',
+    path: '/feature-builder',
+    isAvailable: true
+  },
+  {
+    id: 'quick-prompts',
+    title: 'Quick Prompt Library',
+    description: 'Pre-built prompts for common development tasks and patterns',
+    icon: <Sparkles className='h-8 w-8' />,
+    color: 'yellow',
+    features: [
+      'Database migration setups',
+      'API endpoint creation',
+      'Component library development',
+      'Testing and deployment scripts'
+    ],
+    useCase: 'Rapidly generate code for common development patterns',
+    path: '/quick-prompts',
+    isAvailable: false
+  },
+  {
+    id: 'integration-guide',
+    title: 'Tool Integration Guide',
+    description:
+      'Learn how to integrate vibe coding with your development workflow',
+    icon: <Settings className='h-8 w-8' />,
+    color: 'indigo',
+    features: [
+      'Claude Desktop + VS Code setup',
+      'API integration examples',
+      'Cursor IDE configuration',
+      'Workflow optimization tips'
+    ],
+    useCase: 'Setup and optimize your vibe coding development environment',
+    path: '/integration-guide',
+    isAvailable: false
+  },
+  {
+    id: 'best-practices',
+    title: 'Vibe Coding Best Practices',
+    description:
+      'Advanced techniques and strategies for professional vibe coding',
+    icon: <BookOpen className='h-8 w-8' />,
+    color: 'red',
+    features: [
+      'Prompt engineering techniques',
+      'Code quality assurance',
+      'Security best practices',
+      'Team collaboration strategies'
+    ],
+    useCase: 'Master advanced vibe coding techniques and methodologies',
+    path: '/best-practices',
+    isAvailable: false
+  }
+]
 
-interface ColorClass {
-  bg: string
-  border: string
-  text: string
-  icon: string
-  button: string
-  accent: string
-}
-
-interface Route {
-  id: string
-  title: string
-  description: string
-  icon: ReactNode
-  color: ColorScheme
-  features: string[]
-  useCase: string
-  path: string
-  isAvailable: boolean
-}
+const colorClasses: Record<ColorScheme, ColorClass> = {
+  blue: {
+    bg: 'bg-blue-50',
+    border: 'border-blue-200',
+    text: 'text-blue-900',
+    icon: 'text-blue-600',
+    button: 'bg-blue-600 hover:bg-blue-700',
+    accent: 'bg-blue-100'
+  },
+  green: {
+    bg: 'bg-green-50',
+    border: 'border-green-200',
+    text: 'text-green-900',
+    icon: 'text-green-600',
+    button: 'bg-green-600 hover:bg-green-700',
+    accent: 'bg-green-100'
+  },
+  purple: {
+    bg: 'bg-purple-50',
+    border: 'border-purple-200',
+    text: 'text-purple-900',
+    icon: 'text-purple-600',
+    button: 'bg-purple-600 hover:bg-purple-700',
+    accent: 'bg-purple-100'
+  },
+  yellow: {
+    bg: 'bg-yellow-50',
+    border: 'border-yellow-200',
+    text: 'text-yellow-900',
+    icon: 'text-yellow-600',
+    button: 'bg-yellow-600 hover:bg-yellow-700',
+    accent: 'bg-yellow-100'
+  },
+  indigo: {
+    bg: 'bg-indigo-50',
+    border: 'border-indigo-200',
+    text: 'text-indigo-900',
+    icon: 'text-indigo-600',
+    button: 'bg-indigo-600 hover:bg-indigo-700',
+    accent: 'bg-indigo-100'
+  },
+  red: {
+    bg: 'bg-red-50',
+    border: 'border-red-200',
+    text: 'text-red-900',
+    icon: 'text-red-600',
+    button: 'bg-red-600 hover:bg-red-700',
+    accent: 'bg-red-100'
+  }
+} as const
 
 const PromptRoutesPage = () => {
   const router = useRouter()
   const [selectedRoute, setSelectedRoute] = useState<Route | null>(null)
-
-  const promptRoutes: Route[] = [
-    {
-      id: 'system-prompt',
-      title: 'System Prompt Generator',
-      description:
-        'Create consistent AI behavior for professional vibe coding sessions',
-      icon: <Brain className='h-8 w-8' />,
-      color: 'blue' as ColorScheme,
-      features: [
-        'Define AI personality and expertise level',
-        'Set coding standards and quality requirements',
-        'Configure security and best practices',
-        'Establish team context and communication style'
-      ],
-      useCase:
-        'Set once per project to establish consistent code quality and standards',
-      path: '/system-prompt-generator',
-      isAvailable: true
-    },
-    {
-      id: 'user-prompt',
-      title: 'S.C.A.F.F. User Prompt Generator',
-      description:
-        'Generate structured prompts for specific coding tasks and features',
-      icon: <Target className='h-8 w-8' />,
-      color: 'green',
-      features: [
-        'Situation, Challenge, Audience, Format, Foundations framework',
-        'Example-driven and constraint-based options',
-        'Test-driven development support',
-        'Production-ready code specifications'
-      ],
-      useCase: 'Use for each feature or component you want to build',
-      path: '/user-prompt-generator',
-      isAvailable: true
-    },
-    {
-      id: 'feature-builder',
-      title: 'Feature-by-Feature Builder',
-      description:
-        'Systematic approach to building applications one feature at a time',
-      icon: <Code2 className='h-8 w-8' />,
-      color: 'purple',
-      features: [
-        'Progressive feature development',
-        'Integration planning between features',
-        'Free tier optimization strategies',
-        'Complete feature implementation'
-      ],
-      useCase: 'Plan and execute full application development systematically',
-      path: '/feature-builder',
-      isAvailable: true
-    },
-    {
-      id: 'quick-prompts',
-      title: 'Quick Prompt Library',
-      description:
-        'Pre-built prompts for common development tasks and patterns',
-      icon: <Sparkles className='h-8 w-8' />,
-      color: 'yellow',
-      features: [
-        'Database migration setups',
-        'API endpoint creation',
-        'Component library development',
-        'Testing and deployment scripts'
-      ],
-      useCase: 'Rapidly generate code for common development patterns',
-      path: '/quick-prompts',
-      isAvailable: false
-    },
-    {
-      id: 'integration-guide',
-      title: 'Tool Integration Guide',
-      description:
-        'Learn how to integrate vibe coding with your development workflow',
-      icon: <Settings className='h-8 w-8' />,
-      color: 'indigo',
-      features: [
-        'Claude Desktop + VS Code setup',
-        'API integration examples',
-        'Cursor IDE configuration',
-        'Workflow optimization tips'
-      ],
-      useCase: 'Setup and optimize your vibe coding development environment',
-      path: '/integration-guide',
-      isAvailable: false
-    },
-    {
-      id: 'best-practices',
-      title: 'Vibe Coding Best Practices',
-      description:
-        'Advanced techniques and strategies for professional vibe coding',
-      icon: <BookOpen className='h-8 w-8' />,
-      color: 'red',
-      features: [
-        'Prompt engineering techniques',
-        'Code quality assurance',
-        'Security best practices',
-        'Team collaboration strategies'
-      ],
-      useCase: 'Master advanced vibe coding techniques and methodologies',
-      path: '/best-practices',
-      isAvailable: false
-    }
-  ]
-
-  const colorClasses: Record<ColorScheme, ColorClass> = {
-    blue: {
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      text: 'text-blue-900',
-      icon: 'text-blue-600',
-      button: 'bg-blue-600 hover:bg-blue-700',
-      accent: 'bg-blue-100'
-    },
-    green: {
-      bg: 'bg-green-50',
-      border: 'border-green-200',
-      text: 'text-green-900',
-      icon: 'text-green-600',
-      button: 'bg-green-600 hover:bg-green-700',
-      accent: 'bg-green-100'
-    },
-    purple: {
-      bg: 'bg-purple-50',
-      border: 'border-purple-200',
-      text: 'text-purple-900',
-      icon: 'text-purple-600',
-      button: 'bg-purple-600 hover:bg-purple-700',
-      accent: 'bg-purple-100'
-    },
-    yellow: {
-      bg: 'bg-yellow-50',
-      border: 'border-yellow-200',
-      text: 'text-yellow-900',
-      icon: 'text-yellow-600',
-      button: 'bg-yellow-600 hover:bg-yellow-700',
-      accent: 'bg-yellow-100'
-    },
-    indigo: {
-      bg: 'bg-indigo-50',
-      border: 'border-indigo-200',
-      text: 'text-indigo-900',
-      icon: 'text-indigo-600',
-      button: 'bg-indigo-600 hover:bg-indigo-700',
-      accent: 'bg-indigo-100'
-    },
-    red: {
-      bg: 'bg-red-50',
-      border: 'border-red-200',
-      text: 'text-red-900',
-      icon: 'text-red-600',
-      button: 'bg-red-600 hover:bg-red-700',
-      accent: 'bg-red-100'
-    }
-  } as const
-
-  // Function to safely get color classes
-  const getColorClasses = (color: ColorScheme) => {
-    return colorClasses[color] || colorClasses.blue // Fallback to blue if color is invalid
-  }
-
-  const handleRouteClick = (route: Route) => {
-    if (route.isAvailable) {
-      router.push(route.path)
-      setSelectedRoute(route)
-    }
-  }
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 to-gray-100'>
