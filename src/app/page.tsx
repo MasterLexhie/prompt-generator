@@ -99,8 +99,8 @@ const promptRoutes: Route[] = [
       'Workflow optimization tips'
     ],
     useCase: 'Setup and optimize your vibe coding development environment',
-    path: '/integration-guide',
-    isAvailable: false
+    path: '/tool-integration-guide',
+    isAvailable: true
   },
   {
     id: 'best-practices',
