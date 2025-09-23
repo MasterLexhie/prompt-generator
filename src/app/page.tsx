@@ -82,8 +82,8 @@ const promptRoutes: Route[] = [
       'Testing and deployment scripts'
     ],
     useCase: 'Rapidly generate code for common development patterns',
-    path: '/quick-prompts',
-    isAvailable: false
+    path: '/quick-prompts-library',
+    isAvailable: true
   },
   {
     id: 'integration-guide',
