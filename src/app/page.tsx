@@ -117,7 +117,7 @@ const promptRoutes: Route[] = [
     ],
     useCase: 'Master advanced vibe coding techniques and methodologies',
     path: '/best-practices',
-    isAvailable: false
+    isAvailable: true
   }
 ]
 
