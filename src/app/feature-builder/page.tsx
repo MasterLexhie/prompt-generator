@@ -6,24 +6,12 @@ import {
   CheckCircle,
   Clock,
   AlertCircle,
-  ArrowRight,
-  ArrowDown,
-  Settings,
-  Database,
-  Shield,
-  Users,
-  Zap,
   Download,
   Copy,
   Trash2,
   Edit3,
   Play,
-  Pause,
-  RotateCcw,
-  Target,
-  Layers,
-  GitBranch,
-  TestTube
+  Layers
 } from 'lucide-react'
 import type {
   Project,
@@ -35,6 +23,7 @@ import type {
   FeatureTemplate,
   ProjectSummary
 } from '@/types/featureBuilder'
+import Link from 'next/link'
 
 // Predefined feature templates organized by phase
 const featureTemplates: PhaseTemplates = {
@@ -457,10 +446,31 @@ const FeatureByFeatureBuilder: React.FC = () => {
               </div>
             </div>
             <div className='flex items-center space-x-3'>
+              {/* Back to Home Button */}
+              <Link
+                href='/'
+                className='flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200'
+              >
+                <svg
+                  className='h-4 w-4'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M10 19l-7-7m0 0l7-7m-7 7h18'
+                  />
+                </svg>
+                <span className='hidden sm:inline'>Back to Home</span>
+                <span className='sm:hidden'>Back</span>
+              </Link>
               <button
                 onClick={exportProjectPlan}
                 disabled={features.length === 0}
-                className='bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg flex items-center space-x-2'
+                className='bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm flex items-center space-x-2'
               >
                 <Download className='h-4 w-4' />
                 <span>Export Plan</span>

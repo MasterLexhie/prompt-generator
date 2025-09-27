@@ -28,6 +28,7 @@ import {
   CategoryFilter,
   DifficultyFilter
 } from '@/types'
+import Link from 'next/link'
 
 // Static data
 const INTEGRATION_TOOLS: IntegrationTool[] = [
@@ -931,18 +932,42 @@ const ToolIntegrationGuide: React.FC = () => {
       {/* Header */}
       <header className='bg-white shadow-sm border-b'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6'>
-          <div className='flex items-center space-x-3 sm:space-x-4'>
-            <div className='p-2 sm:p-3 bg-indigo-600 rounded-lg'>
-              <Settings className='h-5 w-5 sm:h-6 sm:w-6 text-white' />
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center space-x-3 sm:space-x-4'>
+              <div className='p-2 sm:p-3 bg-indigo-600 rounded-lg'>
+                <Settings className='h-5 w-5 sm:h-6 sm:w-6 text-white' />
+              </div>
+              <div>
+                <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>
+                  Tool Integration Guide
+                </h1>
+                <p className='text-gray-600 text-sm sm:text-base'>
+                  Setup and optimize your vibe coding development environment
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>
-                Tool Integration Guide
-              </h1>
-              <p className='text-gray-600 text-sm sm:text-base'>
-                Setup and optimize your vibe coding development environment
-              </p>
-            </div>
+
+            {/* Back to Home Button */}
+            <Link
+              href='/'
+              className='flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200'
+            >
+              <svg
+                className='h-4 w-4'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M10 19l-7-7m0 0l7-7m-7 7h18'
+                />
+              </svg>
+              <span className='hidden sm:inline'>Back to Home</span>
+              <span className='sm:hidden'>Back</span>
+            </Link>
           </div>
         </div>
       </header>
@@ -958,7 +983,7 @@ const ToolIntegrationGuide: React.FC = () => {
               <select
                 value={categoryFilter}
                 onChange={handleCategoryChange}
-                className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
               >
                 <option value='all'>All Categories</option>
                 <option value='ai-tools'>AI Tools</option>
@@ -974,7 +999,7 @@ const ToolIntegrationGuide: React.FC = () => {
               <select
                 value={difficultyFilter}
                 onChange={handleDifficultyChange}
-                className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-500'
               >
                 <option value='all'>All Levels</option>
                 <option value='beginner'>Beginner</option>

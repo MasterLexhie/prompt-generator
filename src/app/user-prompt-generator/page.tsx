@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import Link from 'next/link'
 import {
   Copy,
   Download,
@@ -8,7 +9,8 @@ import {
   Users,
   Settings,
   Shield,
-  Target
+  Target,
+  ArrowLeft
 } from 'lucide-react'
 import type { UserPromptFormData } from '@/types'
 
@@ -212,6 +214,15 @@ const VibeCodePromptGenerator: React.FC = () => {
 
   return (
     <div className='p-6 bg-gray-50 min-h-screen'>
+      <div className='max-w-7xl mx-auto mb-6'>
+        <Link
+          href='/'
+          className='inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200'
+        >
+          <ArrowLeft className='h-4 w-4 mr-2' />
+          Back to Home
+        </Link>
+      </div>
       <div className='bg-white rounded-lg shadow-lg p-8 max-w-7xl mx-auto'>
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-gray-900 mb-3'>

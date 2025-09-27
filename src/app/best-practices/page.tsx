@@ -4,24 +4,36 @@ import {
   BookOpen,
   Target,
   Shield,
+  Zap,
   Users,
   CheckCircle,
   AlertTriangle,
+  Info,
+  Star,
   TrendingUp,
+  Code,
   Brain,
+  GitBranch,
+  Clock,
+  Award,
   ChevronDown,
   ChevronRight,
   Copy,
-  Lightbulb
+  ExternalLink,
+  Lightbulb,
+  Settings,
+  FileText,
+  Database
 } from 'lucide-react'
 import {
   BestPractice,
   Technique,
   AntiPattern,
-  ActionableStep,
-  CategoryFilter, // update for each page
-  DifficultyFilter // update for each page
+  CategoryFilter,
+  DifficultyFilter,
+  ActionableStep
 } from '@/types'
+import Link from 'next/link'
 
 // Static data
 const BEST_PRACTICES: BestPractice[] = [
@@ -55,11 +67,11 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Always use Situation, Challenge, Audience, Format, Foundations for consistent results',
         code: `// Template Structure:
-          SITUATION: [Project context, tech stack, existing code]
-          CHALLENGE: [Specific task, requirements, constraints]  
-          AUDIENCE: [Team skill level, maintenance timeline]
-          FORMAT: [Code style, patterns, documentation needs]
-          FOUNDATIONS: [Security, performance, testing requirements]`,
+SITUATION: [Project context, tech stack, existing code]
+CHALLENGE: [Specific task, requirements, constraints]  
+AUDIENCE: [Team skill level, maintenance timeline]
+FORMAT: [Code style, patterns, documentation needs]
+FOUNDATIONS: [Security, performance, testing requirements]`,
         tip: 'Save successful S.C.A.F.F. templates for reuse across similar projects'
       },
       {
@@ -69,14 +81,14 @@ const BEST_PRACTICES: BestPractice[] = [
           'Provide examples of existing code patterns or desired outcomes',
         code: `SITUATION: Building React components for our design system...
 
-          EXAMPLES: Here's how we've implemented similar components:
-          // Example of our existing pattern
-          const Button = ({ variant, children, ...props }) => {
-            const className = \`btn btn-\${variant}\`;
-            return <button className={className} {...props}>{children}</button>;
-          };
+EXAMPLES: Here's how we've implemented similar components:
+// Example of our existing pattern
+const Button = ({ variant, children, ...props }) => {
+  const className = \`btn btn-\${variant}\`;
+  return <button className={className} {...props}>{children}</button>;
+};
 
-          CHALLENGE: Create a Card component following this same pattern...`,
+CHALLENGE: Create a Card component following this same pattern...`,
         tip: 'Examples are more powerful than lengthy descriptions'
       },
       {
@@ -84,12 +96,12 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Specify Quality Criteria',
         description: 'Define what "good" looks like for your specific context',
         code: `FOUNDATIONS: 
-          - All functions must have TypeScript types
-          - Include error handling for all async operations
-          - Code coverage must be >80%
-          - Follow our ESLint configuration
-          - Include JSDoc comments for public APIs
-          - Performance: <100ms response time for API calls`,
+- All functions must have TypeScript types
+- Include error handling for all async operations
+- Code coverage must be >80%
+- Follow our ESLint configuration
+- Include JSDoc comments for public APIs
+- Performance: <100ms response time for API calls`,
         warning:
           'Generic quality statements are less effective than specific criteria'
       }
@@ -100,21 +112,21 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'API Endpoint Creation',
         scenario: 'Need to create a REST API endpoint for user management',
         badExample: `// Bad prompt:
-          "Create an API endpoint for users"`,
+"Create an API endpoint for users"`,
         goodExample: `// Good prompt:
-          SITUATION: Building Express.js API with TypeScript, using Prisma ORM and PostgreSQL. Current auth system uses JWT tokens.
+SITUATION: Building Express.js API with TypeScript, using Prisma ORM and PostgreSQL. Current auth system uses JWT tokens.
 
-          CHALLENGE: Create a complete user management endpoint (/api/users) with:
-          - GET /users (list with pagination)
-          - POST /users (create new user)  
-          - PUT /users/:id (update user)
-          - DELETE /users/:id (soft delete)
+CHALLENGE: Create a complete user management endpoint (/api/users) with:
+- GET /users (list with pagination)
+- POST /users (create new user)  
+- PUT /users/:id (update user)
+- DELETE /users/:id (soft delete)
 
-          AUDIENCE: Mid-level backend developers, 3+ year maintenance
+AUDIENCE: Mid-level backend developers, 3+ year maintenance
 
-          FORMAT: Express router, async/await, TypeScript interfaces, Prisma queries
+FORMAT: Express router, async/await, TypeScript interfaces, Prisma queries
 
-          FOUNDATIONS: JWT auth required, input validation with Joi, comprehensive error handling, audit logging`,
+FOUNDATIONS: JWT auth required, input validation with Joi, comprehensive error handling, audit logging`,
         explanation:
           'The good example provides complete context, specific requirements, and quality standards that lead to production-ready code.'
       }
@@ -158,13 +170,13 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Generate code and systematically evaluate quality, completeness, and correctness',
         code: `// Evaluation Checklist:
-          ✓ Does it compile/run without errors?
-          ✓ Meets all specified requirements? 
-          ✓ Follows coding standards?
-          ✓ Includes proper error handling?
-          ✓ Has security considerations?
-          ✓ Is maintainable and readable?
-          ✓ Includes necessary tests?`,
+✓ Does it compile/run without errors?
+✓ Meets all specified requirements? 
+✓ Follows coding standards?
+✓ Includes proper error handling?
+✓ Has security considerations?
+✓ Is maintainable and readable?
+✓ Includes necessary tests?`,
         warning:
           "Don't skip the analysis step - it's where the learning happens"
       },
@@ -174,10 +186,10 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Add specific constraints, examples, or clarifications to address identified issues',
         code: `// Refinement Example:
-          Original: "Include error handling"
-          Refined: "Include comprehensive error handling with try-catch blocks, 
-          user-friendly error messages, and proper HTTP status codes. 
-          Log errors for debugging but don't expose sensitive information."`,
+Original: "Include error handling"
+Refined: "Include comprehensive error handling with try-catch blocks, 
+user-friendly error messages, and proper HTTP status codes. 
+Log errors for debugging but don't expose sensitive information."`,
         tip: 'Each refinement should address specific gaps, not add generic improvements'
       }
     ],
@@ -188,19 +200,19 @@ const BEST_PRACTICES: BestPractice[] = [
         scenario:
           'Creating a user schema that initially missed important constraints',
         badExample: `// Initial attempt result:
-          const userSchema = {
-            name: String,
-            email: String,
-            password: String
-          }`,
+const userSchema = {
+  name: String,
+  email: String,
+  password: String
+}`,
         goodExample: `// After refinement:
-          const userSchema = {
-            name: { type: String, required: true, trim: true, maxlength: 100 },
-            email: { type: String, required: true, unique: true, lowercase: true },
-            password: { type: String, required: true, minlength: 8 },
-            createdAt: { type: Date, default: Date.now },
-            isActive: { type: Boolean, default: true }
-          }`,
+const userSchema = {
+  name: { type: String, required: true, trim: true, maxlength: 100 },
+  email: { type: String, required: true, unique: true, lowercase: true },
+  password: { type: String, required: true, minlength: 8 },
+  createdAt: { type: Date, default: Date.now },
+  isActive: { type: Boolean, default: true }
+}`,
         explanation:
           'Refinement added validation rules, constraints, and audit fields that were missing from the initial result.'
       }
@@ -240,14 +252,14 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Create standardized checklist for reviewing all AI-generated code',
         code: `// Code Review Checklist:
-          □ Functionality: Does it work as specified?
-          □ Security: No vulnerabilities or data exposure?
-          □ Performance: Efficient algorithms and queries?
-          □ Maintainability: Clear, readable, well-structured?
-          □ Testing: Includes appropriate test coverage?
-          □ Documentation: Adequate comments and docs?
-          □ Standards: Follows project coding conventions?
-          □ Dependencies: Uses approved libraries only?`,
+□ Functionality: Does it work as specified?
+□ Security: No vulnerabilities or data exposure?
+□ Performance: Efficient algorithms and queries?
+□ Maintainability: Clear, readable, well-structured?
+□ Testing: Includes appropriate test coverage?
+□ Documentation: Adequate comments and docs?
+□ Standards: Follows project coding conventions?
+□ Dependencies: Uses approved libraries only?`,
         tip: 'Use this checklist for every piece of AI-generated code, no exceptions'
       },
       {
@@ -256,11 +268,11 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Test generated code in isolated environment before integration',
         code: `// Testing Approach:
-          1. Unit Tests: Test individual functions/methods
-          2. Integration Tests: Test with existing systems  
-          3. Edge Case Tests: Boundary conditions, error cases
-          4. Performance Tests: Load and stress testing
-          5. Security Tests: Input validation, auth checks`,
+1. Unit Tests: Test individual functions/methods
+2. Integration Tests: Test with existing systems  
+3. Edge Case Tests: Boundary conditions, error cases
+4. Performance Tests: Load and stress testing
+5. Security Tests: Input validation, auth checks`,
         warning:
           'Never deploy AI-generated code directly to production without thorough testing'
       },
@@ -269,15 +281,15 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Document AI Assistance',
         description: 'Track which code was AI-generated for future maintenance',
         code: `// Good documentation practice:
-          /**
-           * User authentication middleware
-           * Generated with Claude AI assistance on 2024-01-15
-           * Customized for our JWT implementation
-           * 
-           * @param {Request} req - Express request object
-           * @param {Response} res - Express response object  
-           * @param {NextFunction} next - Express next function
-           */`,
+/**
+ * User authentication middleware
+ * Generated with Claude AI assistance on 2024-01-15
+ * Customized for our JWT implementation
+ * 
+ * @param {Request} req - Express request object
+ * @param {Response} res - Express response object  
+ * @param {NextFunction} next - Express next function
+ */`,
         tip: "This helps future maintainers understand the code's origin and context"
       }
     ],
@@ -287,11 +299,11 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Security Vulnerability Detection',
         scenario: 'AI generated SQL query that was vulnerable to injection',
         badExample: `// Generated code (vulnerable):
-          const query = \`SELECT * FROM users WHERE email = '\${email}'\`;
-          db.query(query);`,
+const query = \`SELECT * FROM users WHERE email = '\${email}'\`;
+db.query(query);`,
         goodExample: `// After security review (safe):
-          const query = 'SELECT * FROM users WHERE email = ?';
-          db.query(query, [email]);`,
+const query = 'SELECT * FROM users WHERE email = ?';
+db.query(query, [email]);`,
         explanation:
           'Code review caught SQL injection vulnerability and replaced with parameterized query.'
       }
@@ -327,14 +339,14 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Security-First Prompt Engineering',
         description: 'Always include security requirements in your prompts',
         code: `FOUNDATIONS: 
-          Security Requirements:
-          - Implement proper input validation and sanitization
-          - Use parameterized queries to prevent SQL injection
-          - Include authentication and authorization checks
-          - Follow OWASP security guidelines
-          - Implement rate limiting and abuse prevention
-          - Use secure password hashing (bcrypt, Argon2)
-          - Validate all user inputs on both client and server`,
+Security Requirements:
+- Implement proper input validation and sanitization
+- Use parameterized queries to prevent SQL injection
+- Include authentication and authorization checks
+- Follow OWASP security guidelines
+- Implement rate limiting and abuse prevention
+- Use secure password hashing (bcrypt, Argon2)
+- Validate all user inputs on both client and server`,
         warning:
           'Generic security statements are insufficient - be specific about your requirements'
       },
@@ -344,14 +356,14 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Establish mandatory security review for AI-generated code',
         code: `// Security Review Checklist:
-          □ Input Validation: All inputs validated and sanitized?
-          □ SQL Injection: Parameterized queries used?
-          □ XSS Prevention: Output properly encoded?
-          □ Authentication: Proper auth checks implemented?
-          □ Authorization: Role-based access control working?
-          □ Secrets: No hardcoded credentials or keys?
-          □ Cryptography: Using established libraries only?
-          □ Error Handling: No sensitive info in error messages?`,
+□ Input Validation: All inputs validated and sanitized?
+□ SQL Injection: Parameterized queries used?
+□ XSS Prevention: Output properly encoded?
+□ Authentication: Proper auth checks implemented?
+□ Authorization: Role-based access control working?
+□ Secrets: No hardcoded credentials or keys?
+□ Cryptography: Using established libraries only?
+□ Error Handling: No sensitive info in error messages?`,
         tip: 'Have a security-focused team member review all AI-generated security code'
       },
       {
@@ -360,16 +372,16 @@ const BEST_PRACTICES: BestPractice[] = [
         description:
           'Integrate security testing into your development pipeline',
         code: `// Security Testing Integration:
-          // Static analysis
-          npm run lint:security  
-          npm audit
+// Static analysis
+npm run lint:security  
+npm audit
 
-          // Dependency scanning  
-          npm install --package-lock-only
-          npm audit --audit-level moderate
+// Dependency scanning  
+npm install --package-lock-only
+npm audit --audit-level moderate
 
-          // Runtime security testing
-          npm run test:security`,
+// Runtime security testing
+npm run test:security`,
         warning:
           "Automated tools catch common issues but don't replace manual security review"
       }
@@ -380,24 +392,24 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Authentication Implementation',
         scenario: 'AI generated login function with security issues',
         badExample: `// AI-generated (problematic):
-          function login(username, password) {
-            const user = db.query(\`SELECT * FROM users WHERE username='\${username}'\`);
-            if (user && user.password === password) {
-              return { success: true, token: user.id };
-            }
-            return { success: false };
-          }`,
+function login(username, password) {
+  const user = db.query(\`SELECT * FROM users WHERE username='\${username}'\`);
+  if (user && user.password === password) {
+    return { success: true, token: user.id };
+  }
+  return { success: false };
+}`,
         goodExample: `// After security review:
-          async function login(username, password) {
-            const user = await db.query('SELECT * FROM users WHERE username = ? AND active = 1', [username]);
-            if (!user) return { success: false, message: 'Invalid credentials' };
-            
-            const isValid = await bcrypt.compare(password, user.passwordHash);
-            if (!isValid) return { success: false, message: 'Invalid credentials' };
-            
-            const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-            return { success: true, token };
-          }`,
+async function login(username, password) {
+  const user = await db.query('SELECT * FROM users WHERE username = ? AND active = 1', [username]);
+  if (!user) return { success: false, message: 'Invalid credentials' };
+  
+  const isValid = await bcrypt.compare(password, user.passwordHash);
+  if (!isValid) return { success: false, message: 'Invalid credentials' };
+  
+  const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+  return { success: true, token };
+}`,
         explanation:
           'Fixed SQL injection, added password hashing, proper JWT implementation, and consistent error messages.'
       }
@@ -436,19 +448,19 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Create Shared Prompt Library',
         description: 'Build team repository of tested, successful prompts',
         code: `// Team Prompt Library Structure:
-          /prompts
-            /api-endpoints/
-              - rest-crud.md
-              - graphql-resolver.md
-            /components/
-              - react-component.md
-              - vue-component.md
-            /database/
-              - migration.md
-              - schema-design.md
-            /testing/
-              - unit-tests.md
-              - integration-tests.md`,
+/prompts
+  /api-endpoints/
+    - rest-crud.md
+    - graphql-resolver.md
+  /components/
+    - react-component.md
+    - vue-component.md
+  /database/
+    - migration.md
+    - schema-design.md
+  /testing/
+    - unit-tests.md
+    - integration-tests.md`,
         tip: 'Version control your prompt library and encourage team contributions'
       },
       {
@@ -456,12 +468,12 @@ const BEST_PRACTICES: BestPractice[] = [
         title: 'Establish AI Code Review Process',
         description: 'Create team standards for reviewing AI-generated code',
         code: `// AI Code Review Guidelines:
-          1. Label PR with "AI-assisted" tag
-          2. Include original prompt in PR description
-          3. Highlight any manual modifications made
-          4. Extra scrutiny for security-related code
-          5. Verify code matches team conventions
-          6. Test thoroughly before approval`,
+1. Label PR with "AI-assisted" tag
+2. Include original prompt in PR description
+3. Highlight any manual modifications made
+4. Extra scrutiny for security-related code
+5. Verify code matches team conventions
+6. Test thoroughly before approval`,
         warning:
           'AI-generated code should get the same (or more) review scrutiny as human code'
       },
@@ -480,15 +492,15 @@ const BEST_PRACTICES: BestPractice[] = [
         scenario:
           'Team was getting inconsistent results due to different prompting styles',
         badExample: `// Individual approaches (inconsistent):
-          Developer A: "Make a login component"
-          Developer B: "Create React component for user authentication with form validation"  
-          Developer C: [Uses full S.C.A.F.F. structure]`,
+Developer A: "Make a login component"
+Developer B: "Create React component for user authentication with form validation"  
+Developer C: [Uses full S.C.A.F.F. structure]`,
         goodExample: `// Team standard approach:
-          All developers use shared S.C.A.F.F. template:
-          - Standard system prompt for project
-          - Consistent SITUATION and FORMAT sections
-          - Shared code examples and patterns
-          - Common quality standards in FOUNDATIONS`,
+All developers use shared S.C.A.F.F. template:
+- Standard system prompt for project
+- Consistent SITUATION and FORMAT sections
+- Shared code examples and patterns
+- Common quality standards in FOUNDATIONS`,
         explanation:
           'Standardized approach leads to consistent code quality and faster development across the team.'
       }
@@ -510,13 +522,13 @@ const ADVANCED_TECHNIQUES: Technique[] = [
       'Complex algorithms, multi-step processes, or architectural decisions',
     example: `CHALLENGE: Create a user registration system with email verification.
 
-      Think through this step by step:
-      1. First, what are the main components needed?
-      2. What's the flow from registration to verification?
-      3. What security considerations apply at each step?
-      4. How should errors be handled?
+Think through this step by step:
+1. First, what are the main components needed?
+2. What's the flow from registration to verification?
+3. What security considerations apply at each step?
+4. How should errors be handled?
 
-      Now implement the complete system based on your analysis.`,
+Now implement the complete system based on your analysis.`,
     benefits: [
       'Better architectural thinking',
       'More comprehensive solutions',
@@ -531,13 +543,13 @@ const ADVANCED_TECHNIQUES: Technique[] = [
     useWhen:
       'Working with legacy systems, specific performance requirements, or limited resources',
     example: `CONSTRAINTS:
-      - Must work with Internet Explorer 11
-      - Cannot use external dependencies
-      - Maximum bundle size: 50KB
-      - Must complete operations in <200ms
-      - Database queries limited to 3 per request
+- Must work with Internet Explorer 11
+- Cannot use external dependencies
+- Maximum bundle size: 50KB
+- Must complete operations in <200ms
+- Database queries limited to 3 per request
 
-      CHALLENGE: Create user dashboard with these constraints...`,
+CHALLENGE: Create user dashboard with these constraints...`,
     benefits: [
       'Realistic solutions',
       'Performance-conscious code',
@@ -553,9 +565,9 @@ const ADVANCED_TECHNIQUES: Technique[] = [
     useWhen:
       'Complex features, learning new technologies, or exploratory development',
     example: `Step 1: "Create basic user authentication"
-      Step 2: "Add password reset functionality"  
-      Step 3: "Add OAuth integration"
-      Step 4: "Add two-factor authentication"`,
+Step 2: "Add password reset functionality"  
+Step 3: "Add OAuth integration"
+Step 4: "Add two-factor authentication"`,
     benefits: [
       'Manageable complexity',
       'Better learning',
@@ -571,13 +583,13 @@ const ADVANCED_TECHNIQUES: Technique[] = [
       'Quality improvement, code optimization, or learning best practices',
     example: `[After getting initial code]
 
-      "Review the code you just generated and identify:
-      1. Potential security vulnerabilities
-      2. Performance optimization opportunities  
-      3. Code maintainability improvements
-      4. Missing error handling
+"Review the code you just generated and identify:
+1. Potential security vulnerabilities
+2. Performance optimization opportunities  
+3. Code maintainability improvements
+4. Missing error handling
 
-      Then provide an improved version addressing these issues."`,
+Then provide an improved version addressing these issues."`,
     benefits: ['Higher quality code', 'Learning opportunity', 'Self-correction']
   }
 ]
@@ -970,8 +982,44 @@ const ActionableStepCard: React.FC<{
   )
 }
 
+// Custom hook for navigation (framework agnostic)
+const useNavigation = () => {
+  const navigateHome = useCallback(() => {
+    // Option 1: For React Router
+    // navigate('/');
+
+    // Option 2: For Next.js (when available)
+    // router.push('/');
+
+    // Option 3: Generic approach - can be customized
+    if (typeof window !== 'undefined') {
+      // You can replace this with your preferred navigation method
+      window.location.href = '/'
+
+      // Or use browser history if you prefer
+      // window.history.back();
+
+      // Or dispatch a custom event for your app's router to handle
+      // window.dispatchEvent(new CustomEvent('navigate', { detail: { path: '/' } }));
+    }
+  }, [])
+
+  const navigateToTool = useCallback((toolPath: string) => {
+    if (typeof window !== 'undefined') {
+      // Replace with your preferred navigation method
+      window.location.href = toolPath
+
+      // Or for SPA routing:
+      // window.dispatchEvent(new CustomEvent('navigate', { detail: { path: toolPath } }));
+    }
+  }, [])
+
+  return { navigateHome, navigateToTool }
+}
+
 // Main Component
 const VibeCodingBestPractices: React.FC = () => {
+  const { navigateHome, navigateToTool } = useNavigation()
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all')
   const [difficultyFilter, setDifficultyFilter] =
     useState<DifficultyFilter>('all')
@@ -989,6 +1037,18 @@ const VibeCodingBestPractices: React.FC = () => {
     BEST_PRACTICES,
     categoryFilter,
     difficultyFilter
+  )
+
+  // Navigation handlers
+  const handleNavigateHome = useCallback(() => {
+    navigateHome()
+  }, [navigateHome])
+
+  const handleNavigateToTool = useCallback(
+    (toolPath: string) => {
+      navigateToTool(toolPath)
+    },
+    [navigateToTool]
   )
 
   // Event handlers
@@ -1027,19 +1087,43 @@ const VibeCodingBestPractices: React.FC = () => {
       {/* Header */}
       <header className='bg-white shadow-sm border-b'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6'>
-          <div className='flex items-center space-x-3 sm:space-x-4'>
-            <div className='p-2 sm:p-3 bg-red-600 rounded-lg'>
-              <BookOpen className='h-5 w-5 sm:h-6 sm:w-6 text-white' />
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center space-x-3 sm:space-x-4'>
+              <div className='p-2 sm:p-3 bg-red-600 rounded-lg'>
+                <BookOpen className='h-5 w-5 sm:h-6 sm:w-6 text-white' />
+              </div>
+              <div>
+                <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>
+                  Vibe Coding Best Practices
+                </h1>
+                <p className='text-gray-600 text-sm sm:text-base'>
+                  Advanced techniques and methodologies for professional vibe
+                  coding
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>
-                Vibe Coding Best Practices
-              </h1>
-              <p className='text-gray-600 text-sm sm:text-base'>
-                Advanced techniques and methodologies for professional vibe
-                coding
-              </p>
-            </div>
+
+            {/* Back to Home Button */}
+            <Link
+              href='/'
+              className='flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200'
+            >
+              <svg
+                className='h-4 w-4'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M10 19l-7-7m0 0l7-7m-7 7h18'
+                />
+              </svg>
+              <span className='hidden sm:inline'>Back to Home</span>
+              <span className='sm:hidden'>Back</span>
+            </Link>
           </div>
         </div>
       </header>
@@ -1094,7 +1178,7 @@ const VibeCodingBestPractices: React.FC = () => {
                   <select
                     value={categoryFilter}
                     onChange={handleCategoryChange}
-                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='all'>All Categories</option>
                     <option value='prompt-engineering'>
@@ -1114,7 +1198,7 @@ const VibeCodingBestPractices: React.FC = () => {
                   <select
                     value={difficultyFilter}
                     onChange={handleDifficultyChange}
-                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-900 placeholder-gray-500'
                   >
                     <option value='all'>All Levels</option>
                     <option value='essential'>Essential</option>
@@ -1219,6 +1303,68 @@ const VibeCodingBestPractices: React.FC = () => {
               <p className='text-sm text-gray-600'>
                 Never deploy AI-generated code without thorough review, testing,
                 and security analysis.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation CTA Section */}
+        <section className='mt-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8'>
+          <div className='text-center'>
+            <h2 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4'>
+              Ready to Start Vibe Coding?
+            </h2>
+            <p className='text-gray-600 mb-6 max-w-2xl mx-auto'>
+              Now that you've learned the best practices, put them into action
+              with our comprehensive toolkit. Choose your next step to begin
+              professional AI-assisted development.
+            </p>
+
+            <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
+              <Link
+                href='/'
+                className='w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center justify-center space-x-2'
+              >
+                <svg
+                  className='h-5 w-5'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+                  />
+                </svg>
+                <span>Back to Vibe Coding Toolkit</span>
+              </Link>
+
+              <div className='flex flex-col sm:flex-row gap-3'>
+                <Link
+                  href='/system-prompt-generator'
+                  className='w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center justify-center space-x-2'
+                >
+                  <Settings className='h-4 w-4' />
+                  <span>System Prompts</span>
+                </Link>
+
+                <Link
+                  href='/feature-builder'
+                  className='w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center justify-center space-x-2'
+                >
+                  <Code className='h-4 w-4' />
+                  <span>Feature Builder</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className='mt-6 pt-6 border-t border-gray-200'>
+              <p className='text-sm text-gray-500'>
+                <strong>Pro Tip:</strong> Start with the System Prompt Generator
+                to establish your AI's behavior, then use the Feature Builder to
+                systematically develop your application.
               </p>
             </div>
           </div>
