@@ -2,7 +2,7 @@
 
 A professional AI-assisted development toolkit that helps developers generate structured prompts and maintain consistent coding standards across projects.
 
-Link to app - https://prompt-generator-tool.vercel.app/
+Link to app - https://vibecode-toolkit.vercel.app/
 
 ## Features
 
