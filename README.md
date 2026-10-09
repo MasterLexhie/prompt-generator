@@ -1,102 +1,103 @@
-# Vibe Coding Toolkit
+# Prompt Workflow Builder
 
-A professional AI-assisted development toolkit that helps developers generate structured prompts and maintain consistent coding standards across projects.
+A focused tool for creating structured prompts for software-development work.
 
-Link to app - https://vibecode-toolkit.vercel.app/
+It currently provides two workflows:
+
+1. **System Prompt Builder** — define project context, coding standards, constraints, and expected AI behaviour.
+2. **S.C.A.F.F. Feature Prompt Builder** — turn a feature request into a clear implementation prompt.
+
+The application does not call an LLM or autonomously generate code. It helps developers create clearer inputs for their chosen AI coding assistant.
 
 ## Features
 
-### 1. System Prompt Generator
+### System Prompt Builder
 
-Generate consistent AI behavior prompts for professional coding sessions:
+Create a reusable prompt that establishes:
 
-- Define AI personality and expertise level
-- Set coding standards and quality requirements
-- Configure security and best practices
-- Establish team context and communication style
+- AI role and level of expertise
+- Project context and technical stack
+- Coding standards and quality expectations
+- Security considerations and implementation constraints
+- Communication and response preferences
 
-### 2. S.C.A.F.F. User Prompt Generator
+### S.C.A.F.F. Feature Prompt Builder
 
-Create structured prompts for specific coding tasks using the S.C.A.F.F. framework:
+Structure a feature request using the S.C.A.F.F. framework:
 
-- Situation, Challenge, Audience, Format, Foundations framework
-- Example-driven and constraint-based options
-- Test-driven development support
-- Production-ready code specifications
+- **Situation** — relevant product and codebase context
+- **Challenge** — the specific problem to solve
+- **Audience** — the intended user or consumer
+- **Format** — the expected deliverable and response structure
+- **Foundations** — constraints, standards, and acceptance criteria
 
-### Coming Soon
+## Example: S.C.A.F.F. in Practice
 
-1. **Feature-by-Feature Builder**
+**Input**
 
-   - Progressive feature development
-   - Integration planning between features
-   - Free tier optimization strategies
-   - Complete feature implementation
+> Add CSV export to the analytics dashboard.
 
-2. **Quick Prompt Library**
+**Structured prompt**
 
-   - Database migration setups
-   - API endpoint creation
-   - Component library development
-   - Testing and deployment scripts
+> **Situation:** We have a React and TypeScript analytics dashboard that displays campaign metrics from an existing REST API.
+>
+> **Challenge:** Add a CSV export action for the currently filtered dashboard data.
+>
+> **Audience:** Internal marketing users who need to analyze data in spreadsheet tools.
+>
+> **Format:** Implement the UI action, export utility, loading and error states, and tests. Explain the changed files and how the feature is verified.
+>
+> **Foundations:** Preserve active filters, use TypeScript, avoid adding a dependency unless necessary, handle an empty result set, and keep the export client-side.
 
-3. **Tool Integration Guide**
+## Not Implemented
 
-   - Claude Desktop + VS Code setup
-   - API integration examples
-   - Cursor IDE configuration
-   - Workflow optimization tips
+The following ideas are intentionally outside the current scope:
 
-4. **Vibe Coding Best Practices**
-   - Prompt engineering techniques
-   - Code quality assurance
-   - Security best practices
-   - Team collaboration strategies
+- Feature-planning workflow
+- Prompt library
+- Tool-integration guides
+- AI model integration
+- Autonomous code generation
 
 ## Getting Started
 
-1. Install dependencies:
+### Prerequisites
+
+- Node.js 18 or later
+
+### Installation
 
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
-2. Run the development server:
+### Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Workflow
+## Typical Workflow
 
-1. **Set System Prompt**
-
-   - Define AI personality, coding standards, and quality requirements once per project
-
-2. **Generate Feature Prompts**
-
-   - Use S.C.A.F.F. framework to create detailed prompts for each application feature
-
-3. **Build & Integrate**
-   - Generate production-ready code and integrate features systematically
+1. Create a system prompt to establish the project context and engineering expectations.
+2. Use the S.C.A.F.F. builder to turn a feature idea into a structured implementation prompt.
+3. Copy the resulting prompt into the AI coding assistant of your choice.
+4. Review and adapt generated output before integrating it into your codebase.
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org) - React framework
-- TypeScript - Type safety
-- Tailwind CSS - Styling
-- Lucide Icons - UI icons
+- [Next.js](https://nextjs.org)
+- React
+- TypeScript
+- Tailwind CSS
+- Lucide Icons
+
+## Project Status
+
+This is an actively maintained, focused prompt-workflow tool. Its purpose is to improve prompt clarity for software-development tasks—not to replace engineering review or independently generate production code.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome. Please open an issue to discuss a proposed change before submitting a pull request.
